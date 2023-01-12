@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Instantiate(enemyPrefabs[0],transform.parent);
+        InvokeRepeating("SpawnEnemies", 2f, 2f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnEnemies()
     {
-        
+        Vector3 randomLoc = new(Random.Range(-5, 5), 0, 5);
+
+        Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], randomLoc, Quaternion.identity);
     }
 }
